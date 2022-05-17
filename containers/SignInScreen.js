@@ -75,25 +75,17 @@ export default function SignInScreen({ setToken }) {
           <View style={styles.inputWrapper}>
             <TextInput
               placeholder="email"
+              placeholderTextColor="black"
               autoCapitalize="none"
               selectTextOnFocus={true}
               value={username}
               onChangeText={(text) => setUsername(text)}
               style={styles.inputField}
             />
-            <View
-              style={{
-                flexDirection: "row",
-                width: "100%",
-                justifyContent: "space-between",
-                paddingBottom: 10,
-                borderBottomColor: "red",
-                borderBottomWidth: 2,
-                borderStyle: "solid",
-              }}
-            >
+            <View style={styles.passwordWrapper}>
               <TextInput
                 placeholder="password"
+                placeholderTextColor="black"
                 autoCapitalize="none"
                 secureTextEntry={showPassword}
                 value={password}
@@ -108,26 +100,15 @@ export default function SignInScreen({ setToken }) {
                   height: 20,
                 }}
               >
-                <Text style={{ textAlign: "center" }}> 👁 </Text>
+                <Text style={{ textAlign: "center" }}>👁</Text>
               </TouchableOpacity>
             </View>
           </View>
-          <Text style={{ color: "red", marginTop: 20 }}>{errorMsg}</Text>
+          <Text style={styles.errorStyling}>{errorMsg}</Text>
           <TouchableOpacity
             disabled={isDisabled}
             onPress={handleSignin}
-            style={{
-              borderWidth: 2,
-              borderStyle: "solid",
-              borderColor: "red",
-              width: 200,
-              height: 50,
-              borderRadius: 100,
-              justifyContent: "center",
-              marginTop: 30,
-              marginBottom: 20,
-              // alignContent: "center",
-            }}
+            style={styles.mainBtn}
           >
             <Text style={{ textAlign: "center" }}>Sign in</Text>
           </TouchableOpacity>
@@ -186,5 +167,30 @@ const styles = StyleSheet.create({
     borderBottomWidth: 2,
     borderStyle: "solid",
     paddingBottom: 10,
+  },
+  passwordWrapper: {
+    flexDirection: "row",
+    width: "100%",
+    justifyContent: "space-between",
+    paddingBottom: 10,
+    borderBottomColor: "red",
+    borderBottomWidth: 2,
+    borderStyle: "solid",
+  },
+  errorStyling: {
+    color: "red",
+    marginTop: 20,
+  },
+  mainBtn: {
+    borderWidth: 2,
+    borderStyle: "solid",
+    borderColor: "red",
+    width: 200,
+    height: 50,
+    borderRadius: 100,
+    justifyContent: "center",
+    marginTop: 30,
+    marginBottom: 20,
+    // alignContent: "center",
   },
 });
