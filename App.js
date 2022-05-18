@@ -9,7 +9,10 @@ import ProfileScreen from "./containers/ProfileScreen";
 import SignInScreen from "./containers/SignInScreen";
 import SignUpScreen from "./containers/SignUpScreen";
 import SettingsScreen from "./containers/SettingsScreen";
+import Rooms from "./containers/Rooms";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import SplashScreen from "./containers/SplashScreen";
+import LogoTitle from "./components/LogoTitlle";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -83,16 +86,30 @@ export default function App() {
                   }}
                 >
                   {() => (
-                    <Stack.Navigator>
+                    <Stack.Navigator
+                      screenOptions={{
+                        headerTitle: () => <LogoTitle />,
+                        headerStyle: { backgroundColor: "white" },
+                        headerTitleStyle: { color: "black" },
+                      }}
+                    >
                       <Stack.Screen
                         name="Home"
                         options={{
                           title: "My App",
-                          headerStyle: { backgroundColor: "red" },
-                          headerTitleStyle: { color: "white" },
                         }}
                       >
                         {() => <HomeScreen />}
+                      </Stack.Screen>
+
+                      <Stack.Screen
+                        name="Rooms"
+                        options={{
+                          title: "My App",
+                          headerTitle: () => <LogoTitle />,
+                        }}
+                      >
+                        {() => <Rooms />}
                       </Stack.Screen>
 
                       <Stack.Screen
@@ -102,6 +119,32 @@ export default function App() {
                         }}
                       >
                         {() => <ProfileScreen />}
+                      </Stack.Screen>
+                    </Stack.Navigator>
+                  )}
+                </Tab.Screen>
+                <Tab.Screen
+                  name="TabMap"
+                  options={{
+                    tabBarLabel: "Map",
+                    tabBarIcon: ({ color, size }) => (
+                      <MaterialCommunityIcons
+                        name="map-marker-outline"
+                        size={size}
+                        color={color}
+                      />
+                    ),
+                  }}
+                >
+                  {() => (
+                    <Stack.Navigator>
+                      <Stack.Screen
+                        name="Map"
+                        options={{
+                          title: "Map",
+                        }}
+                      >
+                        {() => <SettingsScreen setToken={setToken} />}
                       </Stack.Screen>
                     </Stack.Navigator>
                   )}
