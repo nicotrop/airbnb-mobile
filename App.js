@@ -9,10 +9,12 @@ import ProfileScreen from "./containers/ProfileScreen";
 import SignInScreen from "./containers/SignInScreen";
 import SignUpScreen from "./containers/SignUpScreen";
 import SettingsScreen from "./containers/SettingsScreen";
-import Rooms from "./containers/Rooms";
+import RoomScreen from "./containers/RoomScreen";
+import AroundMeScreen from "./containers/AroundMeScreen";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import SplashScreen from "./containers/SplashScreen";
 import LogoTitle from "./components/LogoTitlle";
+import BackArrow from "./components/BackArrow";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -107,9 +109,10 @@ export default function App() {
                         options={{
                           title: "My App",
                           headerTitle: () => <LogoTitle />,
+                          headerLeft: () => <BackArrow />,
                         }}
                       >
-                        {() => <Rooms />}
+                        {() => <RoomScreen />}
                       </Stack.Screen>
 
                       <Stack.Screen
@@ -142,9 +145,12 @@ export default function App() {
                         name="Map"
                         options={{
                           title: "Map",
+                          headerTitle: () => <LogoTitle />,
                         }}
                       >
-                        {() => <SettingsScreen setToken={setToken} />}
+                        {(props) => (
+                          <AroundMeScreen setToken={setToken} {...props} />
+                        )}
                       </Stack.Screen>
                     </Stack.Navigator>
                   )}
