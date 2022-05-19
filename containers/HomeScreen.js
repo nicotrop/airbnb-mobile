@@ -41,9 +41,9 @@ export default function HomeScreen() {
     let arr = [];
     for (let i = 0; i < 5; i++) {
       if (i < newNum) {
-        arr.push(<FontAwesome name="star" size={20} color="orange" />);
+        arr.push(<FontAwesome key={i} name="star" size={20} color="orange" />);
       } else {
-        arr.push(<FontAwesome name="star" size={20} color="grey" />);
+        arr.push(<FontAwesome key={i} name="star" size={20} color="grey" />);
       }
     }
     return arr;
