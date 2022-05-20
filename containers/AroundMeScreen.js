@@ -12,8 +12,6 @@ export default function AroundMeScreen(props) {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState();
 
-  //   console.log(props);
-
   useEffect(() => {
     const askPermission = async () => {
       const { status } = await Location.requestForegroundPermissionsAsync();
@@ -85,7 +83,7 @@ export default function AroundMeScreen(props) {
               longitude: marker.location[0],
             }}
             onPress={() => {
-              props.navigation.navigate("Rooms", {
+              props.navigation.push("Rooms", {
                 id: marker.id,
               });
             }}
@@ -96,13 +94,13 @@ export default function AroundMeScreen(props) {
   ) : (
     <MapView
       style={styles.container}
+      showsUserLocation={true}
       initialRegion={{
         latitude: coords.latitude,
         longitude: coords.longitude,
         latitudeDelta: 0.19,
         longitudeDelta: 0.19,
       }}
-      customMapStyle={mapStyle}
     >
       {markers.map((marker, index) => {
         return (
@@ -113,7 +111,7 @@ export default function AroundMeScreen(props) {
               longitude: marker.location[0],
             }}
             onPress={() => {
-              props.navigation.navigate("Rooms", {
+              props.navigation.push("Rooms", {
                 id: marker.id,
               });
             }}

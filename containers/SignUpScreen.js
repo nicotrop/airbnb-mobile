@@ -42,7 +42,8 @@ export default function SignUpScreen({ setToken }) {
             alert(`Welcome ${username} 🥳`);
           }
           const userToken = response.data.token;
-          setToken(userToken);
+          const id = response.data.id;
+          setToken(userToken, id);
         } catch (error) {
           setErrorMsg(error.response.data.error);
         }

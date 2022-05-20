@@ -15,6 +15,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import SplashScreen from "./containers/SplashScreen";
 import LogoTitle from "./components/LogoTitlle";
 import BackArrow from "./components/BackArrow";
+import ForArrow from "./components/ForArrow";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -23,11 +24,14 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [userToken, setUserToken] = useState(null);
 
-  const setToken = async (token) => {
+  const setToken = async (token, id) => {
+    console.log("le log de token ", token);
     if (token) {
       await AsyncStorage.setItem("userToken", token);
+      await AsyncStorage.setItem("userID", id )
     } else {
       await AsyncStorage.removeItem("userToken");
+      await AsyncStorage.removeItem("userID", id )
     }
 
     setUserToken(token);
@@ -149,9 +153,22 @@ export default function App() {
                         }}
                       >
                         {(props) => (
-                          <AroundMeScreen setToken={setToken} {...props} />
+                          <AroundMeScreen {...props} />
                         )}
                       </Stack.Screen>
+
+                      <Stack.Screen
+                        name="Rooms"
+                        options={{
+                          title: "My App",
+                          headerTitle: () => <LogoTitle />,
+                          headerLeft: () => <BackArrow />,
+                        }}
+                      >
+                        {() => <RoomScreen />}
+                      </Stack.Screen>
+
+                      
                     </Stack.Navigator>
                   )}
                 </Tab.Screen>
@@ -176,7 +193,7 @@ export default function App() {
                           title: "Settings",
                         }}
                       >
-                        {() => <SettingsScreen setToken={setToken} />}
+                        {() => <SettingsScreen setToken={setToken}/>}
                       </Stack.Screen>
                     </Stack.Navigator>
                   )}

@@ -12,6 +12,8 @@ import {
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import React, { useState } from "react";
 import axios from "axios";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 export default function SignInScreen({ setToken }) {
   const [password, setPassword] = useState("");
@@ -36,7 +38,8 @@ export default function SignInScreen({ setToken }) {
           alert("Connexion reussi 🥳");
         }
         const userToken = response.data.token;
-        setToken(userToken);
+        const id = response.data.id;
+        setToken(userToken, id);
       } catch (error) {
         setErrorMsg(error.response.data.error);
       }
